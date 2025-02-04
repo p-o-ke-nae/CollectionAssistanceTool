@@ -15,14 +15,14 @@ builder.Services.AddSingleton<IColumnRepository, ColumnRepositoryGAS>(provider =
 {
     var httpClient = provider.GetRequiredService<HttpClient>();
     var configuration = provider.GetRequiredService<IConfiguration>();
-    var baseUrl = configuration["GoogleAppsScript:BaseUrl"];
+    var baseUrl = configuration["GoogleAppsScript:BaseUrl_Column"];
     return new ColumnRepositoryGAS(httpClient, baseUrl);
 });
 builder.Services.AddSingleton<IRecordRepository, RecordRepositoryGAS>(provider =>
 {
     var httpClient = provider.GetRequiredService<HttpClient>();
     var configuration = provider.GetRequiredService<IConfiguration>();
-    var baseUrl = configuration["GoogleAppsScript:BaseUrl"];
+    var baseUrl = configuration["GoogleAppsScript:BaseUrl_Record"];
     return new RecordRepositoryGAS(httpClient, baseUrl);
 });
 builder.Services.AddScoped<IColumnService, ColumnService>();

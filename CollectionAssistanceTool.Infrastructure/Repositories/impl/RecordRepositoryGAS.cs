@@ -27,9 +27,21 @@ namespace CollectionAssistanceTool.Infrastructure.Repositories.impl
         /// <returns>レコードのリスト</returns>
         public IEnumerable<CATRecord> GetRecords(string sheetId)
         {
-            var response = _httpClient.GetStringAsync($"{_baseUrl}/exec?sheet=Record&sheetId={sheetId}").Result;
-            var records = JsonSerializer.Deserialize<List<CATRecord>>(response);
-            return records;
+            try
+            {
+                var response = _httpClient.GetAsync($"{_baseUrl}/exec?sheet=Record&sheetId={sheetId}").Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = response.Content.ReadAsStringAsync().Result;
+                    throw new Exception($"Error retrieving records: {errorContent}");
+                }
+                var records = JsonSerializer.Deserialize<List<CATRecord>>(response.Content.ReadAsStringAsync().Result);
+                return records;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving records", ex);
+            }
         }
 
         /// <summary>
@@ -39,8 +51,20 @@ namespace CollectionAssistanceTool.Infrastructure.Repositories.impl
         /// <param name="record">追加するレコード</param>
         public void AddRecord(string sheetId, CATRecord record)
         {
-            var content = new StringContent(JsonSerializer.Serialize(record), Encoding.UTF8, "application/json");
-            _httpClient.PostAsync($"{_baseUrl}/exec?sheet=Record&sheetId={sheetId}", content).Wait();
+            try
+            {
+                var content = new StringContent(JsonSerializer.Serialize(record), Encoding.UTF8, "application/json");
+                var response = _httpClient.PostAsync($"{_baseUrl}/exec?sheet=Record&sheetId={sheetId}", content).Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = response.Content.ReadAsStringAsync().Result;
+                    throw new Exception($"Error adding record: {errorContent}");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error adding record", ex);
+            }
         }
 
         /// <summary>
@@ -50,8 +74,20 @@ namespace CollectionAssistanceTool.Infrastructure.Repositories.impl
         /// <param name="record">更新するレコード</param>
         public void UpdateRecord(string sheetId, CATRecord record)
         {
-            var content = new StringContent(JsonSerializer.Serialize(record), Encoding.UTF8, "application/json");
-            _httpClient.PutAsync($"{_baseUrl}/exec?sheet=Record&sheetId={sheetId}", content).Wait();
+            try
+            {
+                var content = new StringContent(JsonSerializer.Serialize(record), Encoding.UTF8, "application/json");
+                var response = _httpClient.PutAsync($"{_baseUrl}/exec?sheet=Record&sheetId={sheetId}", content).Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = response.Content.ReadAsStringAsync().Result;
+                    throw new Exception($"Error updating record: {errorContent}");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error updating record", ex);
+            }
         }
 
         /// <summary>
@@ -61,8 +97,20 @@ namespace CollectionAssistanceTool.Infrastructure.Repositories.impl
         /// <param name="id">削除するレコードのID</param>
         public void DeleteRecord(string sheetId, int id)
         {
-            var content = new StringContent(JsonSerializer.Serialize(new { Id = id }), Encoding.UTF8, "application/json");
-            _httpClient.PostAsync($"{_baseUrl}/exec?sheet=Record&sheetId={sheetId}", content).Wait();
+            try
+            {
+                var content = new StringContent(JsonSerializer.Serialize(new { Id = id }), Encoding.UTF8, "application/json");
+                var response = _httpClient.PostAsync($"{_baseUrl}/exec?sheet=Record&sheetId={sheetId}", content).Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = response.Content.ReadAsStringAsync().Result;
+                    throw new Exception($"Error deleting record: {errorContent}");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error deleting record", ex);
+            }
         }
     }
 }

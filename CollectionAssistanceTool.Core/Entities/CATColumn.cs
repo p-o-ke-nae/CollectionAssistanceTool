@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace CollectionAssistanceTool.Core.Entities
 {
     /// <summary>
@@ -8,21 +10,25 @@ namespace CollectionAssistanceTool.Core.Entities
         /// <summary>
         /// 列項目のID
         /// </summary>
-        public int Id { get; set; }
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
 
         /// <summary>
         /// 表示するヘッダ名
         /// </summary>
+        [JsonPropertyName("headerName")]
         public string HeaderName { get; set; }
 
         /// <summary>
         /// 表示幅
         /// </summary>
-        public int Width { get; set; }
+        [JsonPropertyName("width")]
+        public string Width { get; set; }
 
         /// <summary>
         /// 列を表示するか非表示にするか
         /// </summary>
+        [JsonPropertyName("isVisible")]
         public bool IsVisible { get; set; }
     }
 }
