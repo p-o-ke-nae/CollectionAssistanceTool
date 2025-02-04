@@ -23,7 +23,7 @@ namespace CollectionAssistanceTool.Tests
         {
             // Arrange
             var sheetId = "sheet1";
-            var columns = new List<CATColumn> { new CATColumn { Id = 1, HeaderName = "Column1", Width = 100, IsVisible = true } };
+            var columns = new List<CATColumn> { new CATColumn { Id = "1", HeaderName = "Column1", Width = "100", IsVisible = true } };
             _mockColumnRepository.Setup(repo => repo.GetColumns(sheetId)).Returns(columns);
 
             // Act
@@ -38,7 +38,7 @@ namespace CollectionAssistanceTool.Tests
         {
             // Arrange
             var sheetId = "sheet1";
-            var column = new CATColumn { Id = 1, HeaderName = "Column1", Width = 100, IsVisible = true };
+            var column = new CATColumn { Id = "1", HeaderName = "Column1", Width = "100", IsVisible = true };
 
             // Act
             _columnService.AddColumn(sheetId, column);
@@ -52,7 +52,7 @@ namespace CollectionAssistanceTool.Tests
         {
             // Arrange
             var sheetId = "sheet1";
-            var column = new CATColumn { Id = 1, HeaderName = "Column1", Width = 100, IsVisible = true };
+            var column = new CATColumn { Id = "1", HeaderName = "Column1", Width = "100", IsVisible = true };
 
             // Act
             _columnService.UpdateColumn(sheetId, column);
