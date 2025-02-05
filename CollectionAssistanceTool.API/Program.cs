@@ -30,6 +30,17 @@ builder.Services.AddScoped<IRecordService, RecordService>();
 
 builder.Services.AddControllers();
 
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,6 +50,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
+
+// Use CORS
+app.UseCors();
 
 app.UseEndpoints(endpoints =>
 {

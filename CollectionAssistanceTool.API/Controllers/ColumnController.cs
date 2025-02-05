@@ -7,6 +7,7 @@ namespace CollectionAssistanceTool.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors]
     public class ColumnController : ControllerBase
     {
         private readonly IColumnService _columnService;
