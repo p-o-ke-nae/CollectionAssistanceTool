@@ -2,6 +2,7 @@ using CollectionAssistanceTool.Core.Entities;
 using CollectionAssistanceTool.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Cors;
 
 namespace CollectionAssistanceTool.API.Controllers
 {
