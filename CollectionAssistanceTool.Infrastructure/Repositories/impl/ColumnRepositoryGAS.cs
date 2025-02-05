@@ -35,7 +35,6 @@ namespace CollectionAssistanceTool.Infrastructure.Repositories.impl
                     var errorContent = response.Content.ReadAsStringAsync().Result;
                     throw new Exception($"Error retrieving columns: {errorContent}");
                 }
-                var str = response.Content.ReadAsStringAsync().Result;
                 var columns = JsonSerializer.Deserialize<List<CATColumn>>(response.Content.ReadAsStringAsync().Result);
                 return columns;
             }

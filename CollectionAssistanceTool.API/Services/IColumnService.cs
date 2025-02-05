@@ -3,7 +3,7 @@ using CollectionAssistanceTool.Core.Entities;
 namespace CollectionAssistanceTool.API.Services
 {
     /// <summary>
-    /// 列項目に関するビジネスロジックを定義するインターフェース
+    /// 列項目に関するビジネスロジックを提供するインターフェース
     /// </summary>
     public interface IColumnService
     {
